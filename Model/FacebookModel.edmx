@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FaceBookCloneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Friend1ID" Type="int" Nullable="false" />
+          <Property Name="Friend2ID" Type="int" Nullable="false" />
+          <Property Name="AddedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FriendRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="P1Id" Type="int" Nullable="false" />
+          <Property Name="P2Id" Type="int" Nullable="false" />
+          <Property Name="RequestedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" />
+          <Property Name="Contact" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Tagline" Type="varchar(max)" />
+          <Property Name="Dp" Type="varchar(max)" />
+          <Property Name="Cover" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="UserComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="CommentText" Type="varchar(max)" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="AddedAt" Type="date" />
+        </EntityType>
+        <EntityType Name="UserPost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PostText" Type="varchar(max)" />
+          <Property Name="Img" Type="varchar(max)" />
+          <Property Name="Likes" Type="int" />
+          <Property Name="CreatedAt" Type="date" />
+          <Property Name="Comment" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_Friend_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Friend" Type="Self.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="Friend1ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Friend_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Friend" Type="Self.Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="Friend2ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FriendRequest_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="FriendRequest" Type="Self.FriendRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FriendRequest">
+              <PropertyRef Name="P1Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FriendRequest_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="FriendRequest" Type="Self.FriendRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FriendRequest">
+              <PropertyRef Name="P2Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserComment_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserComment" Type="Self.UserComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserComment_UserPost">
+          <End Role="UserPost" Type="Self.UserPost" Multiplicity="1" />
+          <End Role="UserComment" Type="Self.UserComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComment">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPost_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserPost" Type="Self.UserPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPost">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FaceBookCloneModelStoreContainer">
+          <EntitySet Name="Friend" EntityType="Self.Friend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FriendRequest" EntityType="Self.FriendRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserComment" EntityType="Self.UserComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPost" EntityType="Self.UserPost" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Friend_User" Association="Self.FK_Friend_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Friend" EntitySet="Friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Friend_User1" Association="Self.FK_Friend_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Friend" EntitySet="Friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FriendRequest_User" Association="Self.FK_FriendRequest_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="FriendRequest" EntitySet="FriendRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FriendRequest_User1" Association="Self.FK_FriendRequest_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="FriendRequest" EntitySet="FriendRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserComment_User" Association="Self.FK_UserComment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserComment" EntitySet="UserComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserComment_UserPost" Association="Self.FK_UserComment_UserPost">
+            <End Role="UserPost" EntitySet="UserPost" />
+            <End Role="UserComment" EntitySet="UserComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPost_User" Association="Self.FK_UserPost_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserPost" EntitySet="UserPost" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FaceBookCloneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FaceBookCloneEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Friends" EntityType="FaceBookCloneModel.Friend" />
+          <EntitySet Name="FriendRequests" EntityType="FaceBookCloneModel.FriendRequest" />
+          <EntitySet Name="Users" EntityType="FaceBookCloneModel.User" />
+          <EntitySet Name="UserComments" EntityType="FaceBookCloneModel.UserComment" />
+          <EntitySet Name="UserPosts" EntityType="FaceBookCloneModel.UserPost" />
+          <AssociationSet Name="FK_Friend_User" Association="FaceBookCloneModel.FK_Friend_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Friend" EntitySet="Friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Friend_User1" Association="FaceBookCloneModel.FK_Friend_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Friend" EntitySet="Friends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FriendRequest_User" Association="FaceBookCloneModel.FK_FriendRequest_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="FriendRequest" EntitySet="FriendRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FriendRequest_User1" Association="FaceBookCloneModel.FK_FriendRequest_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="FriendRequest" EntitySet="FriendRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserComment_User" Association="FaceBookCloneModel.FK_UserComment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserComment" EntitySet="UserComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPost_User" Association="FaceBookCloneModel.FK_UserPost_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserPost" EntitySet="UserPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserComment_UserPost" Association="FaceBookCloneModel.FK_UserComment_UserPost">
+            <End Role="UserPost" EntitySet="UserPosts" />
+            <End Role="UserComment" EntitySet="UserComments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Friend1ID" Type="Int32" Nullable="false" />
+          <Property Name="Friend2ID" Type="Int32" Nullable="false" />
+          <Property Name="AddedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="FaceBookCloneModel.FK_Friend_User" FromRole="Friend" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="FaceBookCloneModel.FK_Friend_User1" FromRole="Friend" ToRole="User" />
+        </EntityType>
+        <EntityType Name="FriendRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P1Id" Type="Int32" Nullable="false" />
+          <Property Name="P2Id" Type="Int32" Nullable="false" />
+          <Property Name="RequestedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="FaceBookCloneModel.FK_FriendRequest_User" FromRole="FriendRequest" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="FaceBookCloneModel.FK_FriendRequest_User1" FromRole="FriendRequest" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tagline" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Dp" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Friends" Relationship="FaceBookCloneModel.FK_Friend_User" FromRole="User" ToRole="Friend" />
+          <NavigationProperty Name="Friends1" Relationship="FaceBookCloneModel.FK_Friend_User1" FromRole="User" ToRole="Friend" />
+          <NavigationProperty Name="FriendRequests" Relationship="FaceBookCloneModel.FK_FriendRequest_User" FromRole="User" ToRole="FriendRequest" />
+          <NavigationProperty Name="FriendRequests1" Relationship="FaceBookCloneModel.FK_FriendRequest_User1" FromRole="User" ToRole="FriendRequest" />
+          <NavigationProperty Name="UserComments" Relationship="FaceBookCloneModel.FK_UserComment_User" FromRole="User" ToRole="UserComment" />
+          <NavigationProperty Name="UserPosts" Relationship="FaceBookCloneModel.FK_UserPost_User" FromRole="User" ToRole="UserPost" />
+        </EntityType>
+        <EntityType Name="UserComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="CommentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="AddedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="User" Relationship="FaceBookCloneModel.FK_UserComment_User" FromRole="UserComment" ToRole="User" />
+          <NavigationProperty Name="UserPost" Relationship="FaceBookCloneModel.FK_UserComment_UserPost" FromRole="UserComment" ToRole="UserPost" />
+        </EntityType>
+        <EntityType Name="UserPost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PostText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Likes" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="FaceBookCloneModel.FK_UserPost_User" FromRole="UserPost" ToRole="User" />
+          <NavigationProperty Name="UserComments" Relationship="FaceBookCloneModel.FK_UserComment_UserPost" FromRole="UserPost" ToRole="UserComment" />
+        </EntityType>
+        <Association Name="FK_Friend_User">
+          <End Type="FaceBookCloneModel.User" Role="User" Multiplicity="1" />
+          <End Type="FaceBookCloneModel.Friend" Role="Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="Friend1ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Friend_User1">
+          <End Type="FaceBookCloneModel.User" Role="User" Multiplicity="1" />
+          <End Type="FaceBookCloneModel.Friend" Role="Friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Friend">
+              <PropertyRef Name="Friend2ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FriendRequest_User">
+          <End Type="FaceBookCloneModel.User" Role="User" Multiplicity="1" />
+          <End Type="FaceBookCloneModel.FriendRequest" Role="FriendRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FriendRequest">
+              <PropertyRef Name="P1Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FriendRequest_User1">
+          <End Type="FaceBookCloneModel.User" Role="User" Multiplicity="1" />
+          <End Type="FaceBookCloneModel.FriendRequest" Role="FriendRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FriendRequest">
+              <PropertyRef Name="P2Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserComment_User">
+          <End Type="FaceBookCloneModel.User" Role="User" Multiplicity="1" />
+          <End Type="FaceBookCloneModel.UserComment" Role="UserComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPost_User">
+          <End Type="FaceBookCloneModel.User" Role="User" Multiplicity="1" />
+          <End Type="FaceBookCloneModel.UserPost" Role="UserPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPost">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserComment_UserPost">
+          <End Type="FaceBookCloneModel.UserPost" Role="UserPost" Multiplicity="1" />
+          <End Type="FaceBookCloneModel.UserComment" Role="UserComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserPost">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComment">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FaceBookCloneModelStoreContainer" CdmEntityContainer="FaceBookCloneEntities">
+          <EntitySetMapping Name="Friends">
+            <EntityTypeMapping TypeName="FaceBookCloneModel.Friend">
+              <MappingFragment StoreEntitySet="Friend">
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="Friend2ID" ColumnName="Friend2ID" />
+                <ScalarProperty Name="Friend1ID" ColumnName="Friend1ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FriendRequests">
+            <EntityTypeMapping TypeName="FaceBookCloneModel.FriendRequest">
+              <MappingFragment StoreEntitySet="FriendRequest">
+                <ScalarProperty Name="RequestedAt" ColumnName="RequestedAt" />
+                <ScalarProperty Name="P2Id" ColumnName="P2Id" />
+                <ScalarProperty Name="P1Id" ColumnName="P1Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FaceBookCloneModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="Dp" ColumnName="Dp" />
+                <ScalarProperty Name="Tagline" ColumnName="Tagline" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserComments">
+            <EntityTypeMapping TypeName="FaceBookCloneModel.UserComment">
+              <MappingFragment StoreEntitySet="UserComment">
+                <ScalarProperty Name="AddedAt" ColumnName="AddedAt" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPosts">
+            <EntityTypeMapping TypeName="FaceBookCloneModel.UserPost">
+              <MappingFragment StoreEntitySet="UserPost">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Likes" ColumnName="Likes" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="PostText" ColumnName="PostText" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

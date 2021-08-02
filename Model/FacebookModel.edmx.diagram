@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="781c482e8a564fea8a91cd8a50540f7e" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="FaceBookCloneModel.Friend" Width="1.5" PointX="3" PointY="3" />
+        <EntityTypeShape EntityType="FaceBookCloneModel.FriendRequest" Width="1.5" PointX="3" PointY="9" />
+        <EntityTypeShape EntityType="FaceBookCloneModel.User" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="FaceBookCloneModel.UserComment" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="FaceBookCloneModel.UserPost" Width="1.5" PointX="3" PointY="11.875" />
+        <AssociationConnector Association="FaceBookCloneModel.FK_Friend_User" />
+        <AssociationConnector Association="FaceBookCloneModel.FK_Friend_User1" />
+        <AssociationConnector Association="FaceBookCloneModel.FK_FriendRequest_User" />
+        <AssociationConnector Association="FaceBookCloneModel.FK_FriendRequest_User1" />
+        <AssociationConnector Association="FaceBookCloneModel.FK_UserComment_User" />
+        <AssociationConnector Association="FaceBookCloneModel.FK_UserPost_User" />
+        <AssociationConnector Association="FaceBookCloneModel.FK_UserComment_UserPost" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
