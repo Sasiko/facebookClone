@@ -4,3 +4,11 @@ The task involves creating a social media clone of facebook with specific criter
 With CRUD implementation, the user can register an account, send friend request, like a friends posts, submit posts, change profile picture. Used LINQ to filtrate data.
 
 The applications was further built with WPF and XAML that implements patterns MVVM
+
+
+![](https://i.imgur.com/NQpd0Kn.png)
+![](https://i.imgur.com/8nVmaMY.png)
+![](https://i.imgur.com/Uluqdzh.png)
+![](https://i.imgur.com/tNwDCwU.png)
+
+
