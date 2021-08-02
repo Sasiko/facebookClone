@@ -9,6 +9,6 @@ The applications was further built with WPF and XAML that implements patterns MV
 ![](https://i.imgur.com/NQpd0Kn.png)
 ![](https://i.imgur.com/8nVmaMY.png)
 ![](https://i.imgur.com/Uluqdzh.png)
-![](https://i.imgur.com/tNwDCwU.png)
+![](https://i.imgur.com/fKr91Zq.png)
 
 
