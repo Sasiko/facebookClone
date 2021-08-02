@@ -1,0 +1,51 @@
+﻿<Page x:Class="FacebookCloneApp.Views.MyFriends"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FacebookCloneApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MyFriends" Name="frndWin">
+
+    <Grid Margin="20,20" Name="GridList">
+        <ListBox Margin="30,0,0,0" SelectedItem="{Binding SelectedUser, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding FriendsList, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Margin="0,5,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Height="80" Width="80" Grid.Column="0">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Dp}"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <StackPanel Margin="0,25,0,0" Grid.Column="1" Orientation="Vertical" Width="500" Height="100" >
+
+                                <TextBlock Text="{Binding FullName}" Margin="5,1,0,1"></TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontWeight="Bold"  Text="Gender: " Margin="5,1,0,1"></TextBlock>
+                                    <TextBlock Foreground="Blue" Text="{Binding Gender}" Margin="3,1,0,1"></TextBlock>
+
+                                    <Button FontSize="20" CommandParameter="{Binding Path=.}" Command="{Binding ElementName=frndWin, Path=DataContext.UnFriend}" Content="UnFriend" Margin="105,1,0,1"></Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontWeight="Bold"   Text="Contact: " Margin="5,1,0,1"></TextBlock>
+                                    <TextBlock Foreground="Blue" Text="{Binding Contact}" Margin="3,1,0,1"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </StackPanel>
+
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox  >
+
+    </Grid>
+</Page>

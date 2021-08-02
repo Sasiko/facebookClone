@@ -1,0 +1,29 @@
+﻿<Window x:Class="FacebookCloneApp.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FacebookCloneApp"
+        mc:Ignorable="d"
+        Title="Login" Name="LoginWindow" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="585*"/>
+            <ColumnDefinition Width="76*"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="101*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/Facebook.png"/>
+        </Grid.Background>
+        <Label Content="LOGIN" Margin="0,69,8,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Right" Width="239" />
+        <Label Content="Username" Margin="0,132,8,0" VerticalAlignment="Top" FontSize="18" Foreground="White" RenderTransformOrigin="0.342,3.958" IsEnabled="False" Cursor="None" HorizontalAlignment="Right" Width="239" />
+        <TextBox Height="30" Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,171,34,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" Background="White" BorderThickness="0,0,0,1" BorderBrush="#FF5C5876" Foreground="#FF111530" HorizontalAlignment="Right" Width="420" Grid.ColumnSpan="4"/>
+        <Label Content="Password" Margin="0,210,8,0" VerticalAlignment="Top" FontSize="18" Foreground="White" RenderTransformOrigin="0.342,3.958" IsEnabled="False" Cursor="None" HorizontalAlignment="Right" Width="239" />
+        <PasswordBox PasswordChanged="PasswordBox_PasswordChanged"  Height="30" Margin="0,249,34,0" VerticalAlignment="Top" FontSize="18" Background="White" BorderThickness="0,0,0,1" BorderBrush="#FF5C5876" Foreground="#FF111530" HorizontalAlignment="Right" Width="420" Grid.ColumnSpan="4"/>
+        <Button Content="Login" Margin="0,310,34,0" VerticalAlignment="Top" Height="35" Background="{x:Null}" BorderBrush="White" Foreground="White" FontSize="18" HorizontalAlignment="Right" Width="420" Grid.ColumnSpan="4" Command="{Binding LoginCommand}" />
+        <Label Grid.ColumnSpan="3" Margin="290,295,0,0" Height="30" Width="310">
+            <Hyperlink Foreground="White" CommandParameter="{Binding ElementName=LoginWindow}" Command="{Binding OpenRegisterClick,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">Not a Member? Click here to Join and Connect</Hyperlink>
+        </Label>
+    </Grid>
+</Window>
